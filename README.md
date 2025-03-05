@@ -1,16 +1,4 @@
 This script automates the installation and configuration of Apache Hadoop and Apache Hive on WSL Ubuntu 20.04. It's designed to provide a smooth setup experience with comprehensive error handling and user-friendly features.
-
-## Table of Contents
-
-- [Overview](https://claude.ai/chat/780f1696-72b3-4ac0-a89f-2d8993a6e7c1#overview)
-- [Prerequisites](https://claude.ai/chat/780f1696-72b3-4ac0-a89f-2d8993a6e7c1#prerequisites)
-- [Installation](https://claude.ai/chat/780f1696-72b3-4ac0-a89f-2d8993a6e7c1#installation)
-- [Configuration](https://claude.ai/chat/780f1696-72b3-4ac0-a89f-2d8993a6e7c1#configuration)
-- [Management](https://claude.ai/chat/780f1696-72b3-4ac0-a89f-2d8993a6e7c1#management)
-- [Examples](https://claude.ai/chat/780f1696-72b3-4ac0-a89f-2d8993a6e7c1#examples)
-- [Troubleshooting](https://claude.ai/chat/780f1696-72b3-4ac0-a89f-2d8993a6e7c1#troubleshooting)
-- [Advanced Configuration](https://claude.ai/chat/780f1696-72b3-4ac0-a89f-2d8993a6e7c1#advanced-configuration)
-
 ## Overview
 
 This script sets up:
