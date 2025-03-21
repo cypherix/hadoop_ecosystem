@@ -24,7 +24,7 @@ The installation is optimized for WSL (Windows Subsystem for Linux) Ubuntu 20.04
 1. Download the script:
     
     ```bash
-    wget https://raw.githubusercontent.com/yourusername/hadoop-hive-setup/main/install-hadoop.sh
+    wget https://raw.githubusercontent.com/cypherix/hadoop_ecosystem/main/install-hadoop.sh
     ```
     
 2. Make it executable:
