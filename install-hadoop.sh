@@ -226,16 +226,38 @@ setup_ssh() {
         echo "[INFO] SSH keys already exist."
     fi
 
-    # Restart SSH service
+    # Ensure SSH service is running
     sudo systemctl enable ssh
-    # sudo systemctl restart ssh
-    sleep 2
+    sudo systemctl start ssh
+
+    # Configure SSH to allow passwordless login
+    echo "[INFO] Configuring SSH for passwordless login..."
+    sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+    sudo sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
+    sudo sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config
+    sudo sed -i 's/#AuthorizedKeysFile/AuthorizedKeysFile/' /etc/ssh/sshd_config
+
+    # Restart SSH service to apply changes
+    sudo systemctl restart ssh
 
     # Test SSH connection
+    echo "[INFO] Testing SSH connection to localhost..."
     if su - "$CURRENT_USER" -c "ssh -o StrictHostKeyChecking=no -o ConnectTimeout=5 localhost echo 'SSH test successful'" &>/dev/null; then
         echo "[SUCCESS] SSH connection test successful."
     else
         echo "[ERROR] SSH connection failed! Check 'sudo systemctl status ssh'"
+        echo "[INFO] Attempting to fix SSH configuration..."
+        
+        # Add localhost to known_hosts
+        su - "$CURRENT_USER" -c "ssh-keyscan -H localhost >> $USER_HOME/.ssh/known_hosts"
+        
+        # Retry SSH connection
+        if su - "$CURRENT_USER" -c "ssh -o StrictHostKeyChecking=no -o ConnectTimeout=5 localhost echo 'SSH test successful'" &>/dev/null; then
+            echo "[SUCCESS] SSH connection test successful after fix."
+        else
+            echo "[ERROR] SSH connection still failing. Please check SSH configuration manually."
+            exit 1
+        fi
     fi
 }
 
