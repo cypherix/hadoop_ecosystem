@@ -218,7 +218,7 @@ setup_ssh() {
 
     # Generate SSH key if it doesn't exist
     if [ ! -f "$USER_HOME/.ssh/id_rsa" ]; then
-        su - "$CURRENT_USER" -c "ssh-keyhive -t rsa -N '' -f $USER_HOME/.ssh/id_rsa"
+        su - "$CURRENT_USER" -c "ssh-keygen -t rsa -N '' -f $USER_HOME/.ssh/id_rsa"
         cat "$USER_HOME/.ssh/id_rsa.pub" >> "$USER_HOME/.ssh/authorized_keys"
         chmod 600 "$USER_HOME/.ssh/authorized_keys"
         echo "[SUCCESS] SSH keys generated."
